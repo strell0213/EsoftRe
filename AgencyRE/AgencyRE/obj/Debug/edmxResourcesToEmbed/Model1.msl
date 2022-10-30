@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище agencyEDBModelContainer" CdmEntityContainer="agencyEDBEntities">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="agencyEDBModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="Namee" ColumnName="Namee" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Patronomic" ColumnName="Patronomic" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deals">
+      <EntityTypeMapping TypeName="agencyEDBModel.Deals">
+        <MappingFragment StoreEntitySet="Deals">
+          <ScalarProperty Name="DealID" ColumnName="DealID" />
+          <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+          <ScalarProperty Name="NeedID" ColumnName="NeedID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Needs">
+      <EntityTypeMapping TypeName="agencyEDBModel.Needs">
+        <MappingFragment StoreEntitySet="Needs">
+          <ScalarProperty Name="NeedID" ColumnName="NeedID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="RealtorID" ColumnName="RealtorID" />
+          <ScalarProperty Name="TypeREID" ColumnName="TypeREID" />
+          <ScalarProperty Name="AddressRE" ColumnName="AddressRE" />
+          <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+          <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+          <ScalarProperty Name="MinSquare" ColumnName="MinSquare" />
+          <ScalarProperty Name="MaxSquare" ColumnName="MaxSquare" />
+          <ScalarProperty Name="MinRooms" ColumnName="MinRooms" />
+          <ScalarProperty Name="MaxRooms" ColumnName="MaxRooms" />
+          <ScalarProperty Name="MinFlat" ColumnName="MinFlat" />
+          <ScalarProperty Name="MaxFlat" ColumnName="MaxFlat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Offers">
+      <EntityTypeMapping TypeName="agencyEDBModel.Offers">
+        <MappingFragment StoreEntitySet="Offers">
+          <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="RealtorID" ColumnName="RealtorID" />
+          <ScalarProperty Name="RealEstatesID" ColumnName="RealEstatesID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="StatusDeal" ColumnName="StatusDeal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RealEstates">
+      <EntityTypeMapping TypeName="agencyEDBModel.RealEstates">
+        <MappingFragment StoreEntitySet="RealEstates">
+          <ScalarProperty Name="REID" ColumnName="REID" />
+          <ScalarProperty Name="Vcode" ColumnName="Vcode" />
+          <ScalarProperty Name="AddressRE" ColumnName="AddressRE" />
+          <ScalarProperty Name="TypeRE" ColumnName="TypeRE" />
+          <ScalarProperty Name="coordinates" ColumnName="coordinates" />
+          <ScalarProperty Name="QuaRooms" ColumnName="QuaRooms" />
+          <ScalarProperty Name="QuaFlats" ColumnName="QuaFlats" />
+          <ScalarProperty Name="Flat" ColumnName="Flat" />
+          <ScalarProperty Name="Squares" ColumnName="Squares" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Realtors">
+      <EntityTypeMapping TypeName="agencyEDBModel.Realtors">
+        <MappingFragment StoreEntitySet="Realtors">
+          <ScalarProperty Name="RealtorID" ColumnName="RealtorID" />
+          <ScalarProperty Name="Namee" ColumnName="Namee" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Patronomic" ColumnName="Patronomic" />
+          <ScalarProperty Name="Deals" ColumnName="Deals" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeREs">
+      <EntityTypeMapping TypeName="agencyEDBModel.TypeREs">
+        <MappingFragment StoreEntitySet="TypeREs">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="NameType" ColumnName="NameType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

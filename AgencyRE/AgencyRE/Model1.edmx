@@ -1,0 +1,616 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище agencyEDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Namee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronomic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="DealID" />
+          </Key>
+          <Property Name="DealID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OfferID" Type="int" />
+          <Property Name="NeedID" Type="int" />
+        </EntityType>
+        <EntityType Name="Needs">
+          <Key>
+            <PropertyRef Name="NeedID" />
+          </Key>
+          <Property Name="NeedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="RealtorID" Type="int" />
+          <Property Name="TypeREID" Type="int" />
+          <Property Name="AddressRE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MinPrice" Type="money" Nullable="false" />
+          <Property Name="MaxPrice" Type="money" Nullable="false" />
+          <Property Name="MinSquare" Type="nvarchar" MaxLength="6" />
+          <Property Name="MaxSquare" Type="nvarchar" MaxLength="6" />
+          <Property Name="MinRooms" Type="int" />
+          <Property Name="MaxRooms" Type="int" />
+          <Property Name="MinFlat" Type="int" />
+          <Property Name="MaxFlat" Type="int" />
+        </EntityType>
+        <EntityType Name="Offers">
+          <Key>
+            <PropertyRef Name="OfferID" />
+          </Key>
+          <Property Name="OfferID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="RealtorID" Type="int" Nullable="false" />
+          <Property Name="RealEstatesID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="StatusDeal" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RealEstates">
+          <Key>
+            <PropertyRef Name="REID" />
+          </Key>
+          <Property Name="REID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vcode" Type="int" Nullable="false" />
+          <Property Name="AddressRE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeRE" Type="int" Nullable="false" />
+          <Property Name="coordinates" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuaRooms" Type="int" />
+          <Property Name="QuaFlats" Type="int" />
+          <Property Name="Flat" Type="int" />
+          <Property Name="Squares" Type="nvarchar" MaxLength="6" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Realtors">
+          <Key>
+            <PropertyRef Name="RealtorID" />
+          </Key>
+          <Property Name="RealtorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Namee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronomic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Deals" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TypeREs">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Deals__NeedID__7A672E12">
+          <End Role="Needs" Type="Self.Needs" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Needs">
+              <PropertyRef Name="NeedID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="NeedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__OfferID__797309D9">
+          <End Role="Offers" Type="Self.Offers" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offers">
+              <PropertyRef Name="OfferID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="OfferID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Needs__ClientID__7E37BEF6">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Needs" Type="Self.Needs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Needs">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Needs__RealtorID__7F2BE32F">
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="0..1" />
+          <End Role="Needs" Type="Self.Needs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtors">
+              <PropertyRef Name="RealtorID" />
+            </Principal>
+            <Dependent Role="Needs">
+              <PropertyRef Name="RealtorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Needs__TypeREID__00200768">
+          <End Role="TypeREs" Type="Self.TypeREs" Multiplicity="0..1" />
+          <End Role="Needs" Type="Self.Needs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeREs">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Needs">
+              <PropertyRef Name="TypeREID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__ClientID__7B5B524B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__RealEsta__7D439ABD">
+          <End Role="RealEstates" Type="Self.RealEstates" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstates">
+              <PropertyRef Name="REID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="RealEstatesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__RealtorI__7C4F7684">
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtors">
+              <PropertyRef Name="RealtorID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="RealtorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RealEstat__TypeR__787EE5A0">
+          <End Role="TypeREs" Type="Self.TypeREs" Multiplicity="1" />
+          <End Role="RealEstates" Type="Self.RealEstates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeREs">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="RealEstates">
+              <PropertyRef Name="TypeRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище agencyEDBModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deals" EntityType="Self.Deals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Needs" EntityType="Self.Needs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offers" EntityType="Self.Offers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RealEstates" EntityType="Self.RealEstates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Realtors" EntityType="Self.Realtors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeREs" EntityType="Self.TypeREs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Deals__NeedID__7A672E12" Association="Self.FK__Deals__NeedID__7A672E12">
+            <End Role="Needs" EntitySet="Needs" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__OfferID__797309D9" Association="Self.FK__Deals__OfferID__797309D9">
+            <End Role="Offers" EntitySet="Offers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Needs__ClientID__7E37BEF6" Association="Self.FK__Needs__ClientID__7E37BEF6">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Needs" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Needs__RealtorID__7F2BE32F" Association="Self.FK__Needs__RealtorID__7F2BE32F">
+            <End Role="Realtors" EntitySet="Realtors" />
+            <End Role="Needs" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Needs__TypeREID__00200768" Association="Self.FK__Needs__TypeREID__00200768">
+            <End Role="TypeREs" EntitySet="TypeREs" />
+            <End Role="Needs" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__ClientID__7B5B524B" Association="Self.FK__Offers__ClientID__7B5B524B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__RealEsta__7D439ABD" Association="Self.FK__Offers__RealEsta__7D439ABD">
+            <End Role="RealEstates" EntitySet="RealEstates" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__RealtorI__7C4F7684" Association="Self.FK__Offers__RealtorI__7C4F7684">
+            <End Role="Realtors" EntitySet="Realtors" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RealEstat__TypeR__787EE5A0" Association="Self.FK__RealEstat__TypeR__787EE5A0">
+            <End Role="TypeREs" EntitySet="TypeREs" />
+            <End Role="RealEstates" EntitySet="RealEstates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="agencyEDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Namee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronomic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Needs" Relationship="Self.FK__Needs__ClientID__7E37BEF6" FromRole="Clients" ToRole="Needs" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK__Offers__ClientID__7B5B524B" FromRole="Clients" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="Deals">
+          <Key>
+            <PropertyRef Name="DealID" />
+          </Key>
+          <Property Name="DealID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OfferID" Type="Int32" />
+          <Property Name="NeedID" Type="Int32" />
+          <NavigationProperty Name="Needs" Relationship="Self.FK__Deals__NeedID__7A672E12" FromRole="Deals" ToRole="Needs" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK__Deals__OfferID__797309D9" FromRole="Deals" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="Needs">
+          <Key>
+            <PropertyRef Name="NeedID" />
+          </Key>
+          <Property Name="NeedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="RealtorID" Type="Int32" />
+          <Property Name="TypeREID" Type="Int32" />
+          <Property Name="AddressRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MinPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MaxPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="MinSquare" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="MaxSquare" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="MinRooms" Type="Int32" />
+          <Property Name="MaxRooms" Type="Int32" />
+          <Property Name="MinFlat" Type="Int32" />
+          <Property Name="MaxFlat" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Needs__ClientID__7E37BEF6" FromRole="Needs" ToRole="Clients" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK__Deals__NeedID__7A672E12" FromRole="Needs" ToRole="Deals" />
+          <NavigationProperty Name="Realtors" Relationship="Self.FK__Needs__RealtorID__7F2BE32F" FromRole="Needs" ToRole="Realtors" />
+          <NavigationProperty Name="TypeREs" Relationship="Self.FK__Needs__TypeREID__00200768" FromRole="Needs" ToRole="TypeREs" />
+        </EntityType>
+        <EntityType Name="Offers">
+          <Key>
+            <PropertyRef Name="OfferID" />
+          </Key>
+          <Property Name="OfferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="RealtorID" Type="Int32" Nullable="false" />
+          <Property Name="RealEstatesID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="StatusDeal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Offers__ClientID__7B5B524B" FromRole="Offers" ToRole="Clients" />
+          <NavigationProperty Name="Deals" Relationship="Self.FK__Deals__OfferID__797309D9" FromRole="Offers" ToRole="Deals" />
+          <NavigationProperty Name="RealEstates" Relationship="Self.FK__Offers__RealEsta__7D439ABD" FromRole="Offers" ToRole="RealEstates" />
+          <NavigationProperty Name="Realtors" Relationship="Self.FK__Offers__RealtorI__7C4F7684" FromRole="Offers" ToRole="Realtors" />
+        </EntityType>
+        <EntityType Name="RealEstates">
+          <Key>
+            <PropertyRef Name="REID" />
+          </Key>
+          <Property Name="REID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vcode" Type="Int32" Nullable="false" />
+          <Property Name="AddressRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeRE" Type="Int32" Nullable="false" />
+          <Property Name="coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuaRooms" Type="Int32" />
+          <Property Name="QuaFlats" Type="Int32" />
+          <Property Name="Flat" Type="Int32" />
+          <Property Name="Squares" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK__Offers__RealEsta__7D439ABD" FromRole="RealEstates" ToRole="Offers" />
+          <NavigationProperty Name="TypeREs" Relationship="Self.FK__RealEstat__TypeR__787EE5A0" FromRole="RealEstates" ToRole="TypeREs" />
+        </EntityType>
+        <EntityType Name="Realtors">
+          <Key>
+            <PropertyRef Name="RealtorID" />
+          </Key>
+          <Property Name="RealtorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Namee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronomic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Deals" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Needs" Relationship="Self.FK__Needs__RealtorID__7F2BE32F" FromRole="Realtors" ToRole="Needs" />
+          <NavigationProperty Name="Offers" Relationship="Self.FK__Offers__RealtorI__7C4F7684" FromRole="Realtors" ToRole="Offers" />
+        </EntityType>
+        <EntityType Name="TypeREs">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Needs" Relationship="Self.FK__Needs__TypeREID__00200768" FromRole="TypeREs" ToRole="Needs" />
+          <NavigationProperty Name="RealEstates" Relationship="Self.FK__RealEstat__TypeR__787EE5A0" FromRole="TypeREs" ToRole="RealEstates" />
+        </EntityType>
+        <Association Name="FK__Needs__ClientID__7E37BEF6">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Needs" Type="Self.Needs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Needs">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__ClientID__7B5B524B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__NeedID__7A672E12">
+          <End Role="Needs" Type="Self.Needs" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Needs">
+              <PropertyRef Name="NeedID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="NeedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Deals__OfferID__797309D9">
+          <End Role="Offers" Type="Self.Offers" Multiplicity="0..1" />
+          <End Role="Deals" Type="Self.Deals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offers">
+              <PropertyRef Name="OfferID" />
+            </Principal>
+            <Dependent Role="Deals">
+              <PropertyRef Name="OfferID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Needs__RealtorID__7F2BE32F">
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="0..1" />
+          <End Role="Needs" Type="Self.Needs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtors">
+              <PropertyRef Name="RealtorID" />
+            </Principal>
+            <Dependent Role="Needs">
+              <PropertyRef Name="RealtorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Needs__TypeREID__00200768">
+          <End Role="TypeREs" Type="Self.TypeREs" Multiplicity="0..1" />
+          <End Role="Needs" Type="Self.Needs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeREs">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Needs">
+              <PropertyRef Name="TypeREID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__RealEsta__7D439ABD">
+          <End Role="RealEstates" Type="Self.RealEstates" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RealEstates">
+              <PropertyRef Name="REID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="RealEstatesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Offers__RealtorI__7C4F7684">
+          <End Role="Realtors" Type="Self.Realtors" Multiplicity="1" />
+          <End Role="Offers" Type="Self.Offers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realtors">
+              <PropertyRef Name="RealtorID" />
+            </Principal>
+            <Dependent Role="Offers">
+              <PropertyRef Name="RealtorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RealEstat__TypeR__787EE5A0">
+          <End Role="TypeREs" Type="Self.TypeREs" Multiplicity="1" />
+          <End Role="RealEstates" Type="Self.RealEstates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeREs">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="RealEstates">
+              <PropertyRef Name="TypeRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="agencyEDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Deals" EntityType="Self.Deals" />
+          <EntitySet Name="Needs" EntityType="Self.Needs" />
+          <EntitySet Name="Offers" EntityType="Self.Offers" />
+          <EntitySet Name="RealEstates" EntityType="Self.RealEstates" />
+          <EntitySet Name="Realtors" EntityType="Self.Realtors" />
+          <EntitySet Name="TypeREs" EntityType="Self.TypeREs" />
+          <AssociationSet Name="FK__Needs__ClientID__7E37BEF6" Association="Self.FK__Needs__ClientID__7E37BEF6">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Needs" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__ClientID__7B5B524B" Association="Self.FK__Offers__ClientID__7B5B524B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__NeedID__7A672E12" Association="Self.FK__Deals__NeedID__7A672E12">
+            <End Role="Needs" EntitySet="Needs" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Deals__OfferID__797309D9" Association="Self.FK__Deals__OfferID__797309D9">
+            <End Role="Offers" EntitySet="Offers" />
+            <End Role="Deals" EntitySet="Deals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Needs__RealtorID__7F2BE32F" Association="Self.FK__Needs__RealtorID__7F2BE32F">
+            <End Role="Realtors" EntitySet="Realtors" />
+            <End Role="Needs" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Needs__TypeREID__00200768" Association="Self.FK__Needs__TypeREID__00200768">
+            <End Role="TypeREs" EntitySet="TypeREs" />
+            <End Role="Needs" EntitySet="Needs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__RealEsta__7D439ABD" Association="Self.FK__Offers__RealEsta__7D439ABD">
+            <End Role="RealEstates" EntitySet="RealEstates" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Offers__RealtorI__7C4F7684" Association="Self.FK__Offers__RealtorI__7C4F7684">
+            <End Role="Realtors" EntitySet="Realtors" />
+            <End Role="Offers" EntitySet="Offers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RealEstat__TypeR__787EE5A0" Association="Self.FK__RealEstat__TypeR__787EE5A0">
+            <End Role="TypeREs" EntitySet="TypeREs" />
+            <End Role="RealEstates" EntitySet="RealEstates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище agencyEDBModelContainer" CdmEntityContainer="agencyEDBEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="agencyEDBModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Namee" ColumnName="Namee" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronomic" ColumnName="Patronomic" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deals">
+            <EntityTypeMapping TypeName="agencyEDBModel.Deals">
+              <MappingFragment StoreEntitySet="Deals">
+                <ScalarProperty Name="DealID" ColumnName="DealID" />
+                <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+                <ScalarProperty Name="NeedID" ColumnName="NeedID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Needs">
+            <EntityTypeMapping TypeName="agencyEDBModel.Needs">
+              <MappingFragment StoreEntitySet="Needs">
+                <ScalarProperty Name="NeedID" ColumnName="NeedID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="RealtorID" ColumnName="RealtorID" />
+                <ScalarProperty Name="TypeREID" ColumnName="TypeREID" />
+                <ScalarProperty Name="AddressRE" ColumnName="AddressRE" />
+                <ScalarProperty Name="MinPrice" ColumnName="MinPrice" />
+                <ScalarProperty Name="MaxPrice" ColumnName="MaxPrice" />
+                <ScalarProperty Name="MinSquare" ColumnName="MinSquare" />
+                <ScalarProperty Name="MaxSquare" ColumnName="MaxSquare" />
+                <ScalarProperty Name="MinRooms" ColumnName="MinRooms" />
+                <ScalarProperty Name="MaxRooms" ColumnName="MaxRooms" />
+                <ScalarProperty Name="MinFlat" ColumnName="MinFlat" />
+                <ScalarProperty Name="MaxFlat" ColumnName="MaxFlat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offers">
+            <EntityTypeMapping TypeName="agencyEDBModel.Offers">
+              <MappingFragment StoreEntitySet="Offers">
+                <ScalarProperty Name="OfferID" ColumnName="OfferID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="RealtorID" ColumnName="RealtorID" />
+                <ScalarProperty Name="RealEstatesID" ColumnName="RealEstatesID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StatusDeal" ColumnName="StatusDeal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RealEstates">
+            <EntityTypeMapping TypeName="agencyEDBModel.RealEstates">
+              <MappingFragment StoreEntitySet="RealEstates">
+                <ScalarProperty Name="REID" ColumnName="REID" />
+                <ScalarProperty Name="Vcode" ColumnName="Vcode" />
+                <ScalarProperty Name="AddressRE" ColumnName="AddressRE" />
+                <ScalarProperty Name="TypeRE" ColumnName="TypeRE" />
+                <ScalarProperty Name="coordinates" ColumnName="coordinates" />
+                <ScalarProperty Name="QuaRooms" ColumnName="QuaRooms" />
+                <ScalarProperty Name="QuaFlats" ColumnName="QuaFlats" />
+                <ScalarProperty Name="Flat" ColumnName="Flat" />
+                <ScalarProperty Name="Squares" ColumnName="Squares" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Realtors">
+            <EntityTypeMapping TypeName="agencyEDBModel.Realtors">
+              <MappingFragment StoreEntitySet="Realtors">
+                <ScalarProperty Name="RealtorID" ColumnName="RealtorID" />
+                <ScalarProperty Name="Namee" ColumnName="Namee" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronomic" ColumnName="Patronomic" />
+                <ScalarProperty Name="Deals" ColumnName="Deals" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeREs">
+            <EntityTypeMapping TypeName="agencyEDBModel.TypeREs">
+              <MappingFragment StoreEntitySet="TypeREs">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="NameType" ColumnName="NameType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
